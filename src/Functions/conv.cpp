@@ -24,7 +24,7 @@ namespace Conv
 
         bool useDefaultImplementationForConstants() const override { return true; }
 
-        size_t getNumberOfArguments() const override { return 1; }
+        size_t getNumberOfArguments() const override { return 3; }
 
         bool isSuitableForShortCircuitArgumentsExecution(const DataTypesWithConstInfo & /*arguments*/) const override { return false; }
 
@@ -32,10 +32,19 @@ namespace Conv
 
         ColumnPtr executeImpl(const ColumnsWithTypeAndName & arguments, const DataTypePtr &, size_t input_rows_count) const override
         {
-            const auto & elem = arguments[0];
-            std::cout << "working? " << input_rows_count << ", " << elem.name << std::endl;
+            const ColumnWithTypeAndName & arg_from = arguments[0];
+            const ColumnWithTypeAndName & arg_base_from = arguments[1];
+            const ColumnWithTypeAndName & arg_base_to = arguments[2];
+
+            std::cout << "working? " << input_rows_count << std::endl;
+            std::cout << "arg_from: " << arg_from.column->getName() << std::endl;
+            std::cout << "arg_base_from: " << arg_base_from.column->getName() << std::endl;
+            std::cout << "arg_base_to: " << arg_base_to.column->getName() << std::endl;
+            
             // return ColumnUInt8::create(input_rows_count, isColumnNullable(*elem.column) || elem.type->isLowCardinalityNullable());
-            return ColumnString::create();
+            auto result = ColumnString::create();
+
+            return result;
         }
     };
 }
