@@ -241,6 +241,9 @@ namespace Util
         /// If the value contains references to other properties (${<property>}), these
         /// are expanded.
 
+        virtual bool getHost(const std::string & key) const = 0;
+        /// does some basic validity checking by itself and throw an exception accordingly
+        
         virtual void setString(const std::string & key, const std::string & value);
         /// Sets the property with the given key to the given value.
         /// An already existing value for the key is overwritten.
