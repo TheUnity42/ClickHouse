@@ -110,17 +110,19 @@ protected:
     {
          if (arguments.size() == 0)
                {
-                   if (!std::is_same_v < Transform, ToYearImpl >)
+                   if (!std::is_same_v < Transform, ToYearImpl >) {
                        throw Exception(ErrorCodes::NUMBER_OF_ARGUMENTS_DOESNT_MATCH,
-                           "Arguments don't match, please use 1 or 2"
+                           "Arguments for {} don't match, please use 1 or 2 not {}",
                                 getName(), arguments.size());
+                   }
                }
         else if (arguments.size() == 1)
         {
-            if (!isDateOrDate32(arguments[0].type) && !isDateTime(arguments[0].type) && !isDateTime64(arguments[0].type))
+            if (!isDateOrDate32(arguments[0].type) && !isDateTime(arguments[0].type) && !isDateTime64(arguments[0].type)) {
                 throw Exception(ErrorCodes::ILLEGAL_TYPE_OF_ARGUMENT,
                     "Illegal type {} of argument of function {}. Should be Date, Date32, DateTime or DateTime64",
                     arguments[0].type->getName(), getName());
+            }
         }
         else if (arguments.size() == 2)
         {
