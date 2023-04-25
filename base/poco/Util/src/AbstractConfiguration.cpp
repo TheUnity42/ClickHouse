@@ -262,6 +262,26 @@ bool AbstractConfiguration::getBool(const std::string& key, bool defaultValue) c
 		return defaultValue;
 }
 
+bool AbstractConfiguration::getHost(const std::string & key) const override
+{
+	/// Get the string value associated with the given key
+	std::string value = getString(key);
+
+	/// Trim leading and trailing whitespace from the value
+	Poco::trimInPlace(value);
+
+	if(value.empty()){
+		throw NotFoundException("Value associated with key '" + key + "' cannot be empty.");
+	}
+
+	/// Check that the value matches a valid host format using regular expression
+	std::regex host_regex("^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$|^(?:[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*\\.)+[A-Za-z]{2,}$");
+	if (!std::regex_match(value, host_regex)){
+		throw NotFoundException("Value associated with key '" + key + "' does not match a valid host format.");
+	}
+
+	return true;
+}
 
 void AbstractConfiguration::setString(const std::string& key, const std::string& value)
 {
