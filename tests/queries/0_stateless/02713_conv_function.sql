@@ -21,3 +21,9 @@ SELECT conv('10',1,10); -- { serverError 44 }
 SELECT conv('10',2,10);
 SELECT conv('10',37,10); -- { serverError 44 }
 SELECT conv('10',36,10);
+
+-- test table
+CREATE TABLE test (x String, b0 UInt8, b1 UInt8) ENGINE = Memory;
+INSERT INTO test VALUES ('A',16,2), ('2',10,2),('C',16,10);
+
+SELECT conv(i.x, i.b0, i.b1) FROM test AS i;

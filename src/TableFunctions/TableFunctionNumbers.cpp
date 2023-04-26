@@ -74,7 +74,7 @@ UInt64 TableFunctionNumbers<multithreaded>::evaluateArgument(ContextPtr context,
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
 std::vector<int> generate_series(int start, int stop, int step = 1)
 {
-    if (step == 0 || start == NULL || stop == NULL) {
+    if (step == 0 || start == 0 || stop == 0) {
         throw std::invalid_argument("step cannot be zero, start and stop cannot be NULL");
     }
     if ((step > 0 && start > stop) || (step < 0 && start < stop)) {
@@ -90,7 +90,7 @@ std::vector<int> generate_series(int start, int stop, int step = 1)
 }
 
 std::vector<long long> generate_series(long long start, long long stop, long long step = 1) {
-    if (step == 0 || start == NULL || stop == NULL) {
+    if (step == 0 || start == 0 || stop == 0) {
         throw std::invalid_argument("step cannot be zero, start and stop cannot be NULL");
     }
     if ((step > 0 && start > stop) || (step < 0 && start < stop)) {

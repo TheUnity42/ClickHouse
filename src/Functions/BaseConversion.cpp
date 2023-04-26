@@ -29,12 +29,6 @@ int BaseConversion::toDecimal(const UInt8 * s, size_t length, UInt8 base)
 
     for (size_t i = length - 1; static_cast<long>(i) >= 0; i--)
     {
-        if (valueOf(s[i]) >= base)
-        {
-            printf("Invalid Number");
-            return -1;
-        }
-
         // Update num
         num += valueOf(s[i]) * power;
 

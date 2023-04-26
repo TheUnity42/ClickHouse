@@ -18,6 +18,7 @@
 #include "Poco/NumberParser.h"
 #include "Poco/NumberFormatter.h"
 #include "Poco/String.h"
+#include <regex>
 
 
 using Poco::Mutex;
@@ -262,7 +263,7 @@ bool AbstractConfiguration::getBool(const std::string& key, bool defaultValue) c
 		return defaultValue;
 }
 
-bool AbstractConfiguration::getHost(const std::string & key) const override
+bool AbstractConfiguration::getHost(const std::string & key) const
 {
 	/// Get the string value associated with the given key
 	std::string value = getString(key);
